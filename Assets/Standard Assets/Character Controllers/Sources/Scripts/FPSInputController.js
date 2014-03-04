@@ -1,12 +1,46 @@
 private var motor : CharacterMotor;
-
+var anim : Animator;
+var facing_left : boolean = false ;
 // Use this for initialization
+function start()
+{
+	
+	Debug.Log ("Hello");
+}
 function Awake () {
 	motor = GetComponent(CharacterMotor);
+	anim = GameObject.FindGameObjectWithTag("animacion").GetComponent.<Animator>();
+	// Debug.Log ("Hello");
+	// anim.SetInteger("Direction", 2);
+	
 }
 
 // Update is called once per frame
 function Update () {
+
+	var vertical = Input.GetAxis("Vertical");
+	var horizontal = Input.GetAxis("Horizontal");
+	//GameObject.FindGameObjectWithTag("animacion").transform.localScale = Vector3(1,1,1);
+	if (vertical > 0)
+	{
+	    anim.SetInteger("Direction", 2);
+	}
+	else if (vertical < 0)
+	{
+	    anim.SetInteger("Direction", 4);
+	}
+	else if (horizontal > 0)
+	{
+	    anim.SetInteger("Direction", 3);
+	    facing_left = true;
+	}
+	else if (horizontal < 0)
+	{
+	    anim.SetInteger("Direction", 1);
+	    facing_left = true;
+	}
+	//Debug.Log ("Hello a");
+
 	// Get the input vector from kayboard or analog stick
 	var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 	
@@ -25,6 +59,12 @@ function Update () {
 		
 		// Multiply the normalized direction vector by the modified length
 		directionVector = directionVector * directionLength;
+	}
+	else
+	{
+		// if (facing_left)
+		// 	GameObject.FindGameObjectWithTag("animacion").transform.localScale = Vector3(-1,1,1);
+		anim.SetInteger("Direction", 0);
 	}
 	
 	// Apply the direction to the CharacterMotor
