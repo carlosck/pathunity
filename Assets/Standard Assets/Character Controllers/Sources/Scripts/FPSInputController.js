@@ -1,15 +1,18 @@
 private var motor : CharacterMotor;
 var anim : Animator;
 var facing_left : boolean = false ;
+var Mainactive : boolean = true;
 // Use this for initialization
 function start()
 {
-	
+
 	Debug.Log ("Hello");
+	Mainactive= true;
 }
 function Awake () {
 	motor = GetComponent(CharacterMotor);
 	anim = GameObject.FindGameObjectWithTag("animacion").GetComponent.<Animator>();
+	Mainactive= true;
 	// Debug.Log ("Hello");
 	// anim.SetInteger("Direction", 2);
 	
@@ -17,7 +20,10 @@ function Awake () {
 
 // Update is called once per frame
 function Update () {
-
+	if(!Mainactive)
+	{
+		return false;
+	}
 	var vertical = Input.GetAxis("Vertical");
 	var horizontal = Input.GetAxis("Horizontal");
 	//GameObject.FindGameObjectWithTag("animacion").transform.localScale = Vector3(1,1,1);
@@ -71,7 +77,17 @@ function Update () {
 	motor.inputMoveDirection = transform.rotation * directionVector;
 	motor.inputJump = Input.GetButton("Jump");
 }
-
+function setState(){
+  
+  	anim.SetInteger("Direction", 0);
+  
+  
+}
+function setActives(active_ : boolean){
+  Mainactive = active_;
+  motor.canControl = active_ ;  
+  
+}
 // Require a character controller to be attached to the same game object
 @script RequireComponent (CharacterMotor)
 @script AddComponentMenu ("Character/FPS Input Controller")
