@@ -46,9 +46,10 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\characters\enemys\scripts\EnemyHealth.cs" />
      <Compile Include="Assets\characters\enemys\scripts\enemyAttack.cs" />
-     <Compile Include="Assets\characters\enemys\scripts\enemyHealth.cs" />
      <Compile Include="Assets\characters\hero\scripts\PlayerHealth.cs" />
+     <Compile Include="Assets\characters\hero\scripts\meleeAttack.cs" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>/Users/Seca/Public/wworks/test/pathunity/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>

@@ -21,10 +21,9 @@ public class enemyAttack : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other)
 	{
-		
+		Debug.Log("me pego:"+other.tag);
 		if(other.gameObject == player)
-		{
-			Debug.Log("Player");
+		{			
 			playerInRange = true;
 		}
 	}

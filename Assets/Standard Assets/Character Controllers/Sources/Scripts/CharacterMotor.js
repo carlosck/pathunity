@@ -9,7 +9,6 @@ var useFixedUpdate : boolean = true;
 var anim : Animator;
 var facing_left : boolean = false ;
 var direction_facing : int = 1;
-var meleeObject : GameObject;
 var walkSpeed: int = .5; // regular speed
 var runSpeed: int = 2; // run speed
 var attacking: boolean = false;
@@ -21,7 +20,10 @@ var meleeRange : float = 0.000000000001f;                      // The distance t
 private var timer : float;                                    // A timer to determine when to fire.
 private var meleeRay : Ray;                                   // A ray from the gun end forwards.
 private var meleeHit : RaycastHit;                            // A raycast hit to get information about what was hit.
-private var hitableMask : int;                              // A layer mask so the raycast only hits things on the shootable layer.
+private var hitableMask : int; 
+private var current_melee : GameObject; 
+
+var meleeObject: GameObject;
 //private var gunParticles : ParticleSystem;                    // Reference to the particle system.
 private var meleeLine : LineRenderer;                           // Reference to the line renderer.
 //private var gunAudio : AudioSource;                           // Reference to the audio source.
@@ -38,6 +40,7 @@ var inputMoveDirection : Vector3 = Vector3.zero;
 // for the jump button directly so this script can also be used by AIs.
 @System.NonSerialized
 var inputJump : boolean = false;
+
 
 class CharacterMotorMovement {
 	// The maximum horizontal speed when moving
@@ -202,8 +205,8 @@ function Awake () {
 	controller = GetComponent (CharacterController);
 	tr = transform;
 	shootableMask = LayerMask.GetMask ("atacable");
-	meleeObject = GameObject.Find("melee");	
-	meleeLine = meleeObject.GetComponent(LineRenderer);
+	//meleeObject = GameObject.Find("melee");	
+	
 }
 
 
@@ -247,7 +250,7 @@ private function  SetAnimation(velocity : Vector3)
      	else
      		anim.SetInteger("Direction", 3);
         facing_left = false;
-               
+        direction_facing=1;       
     }
     if(velocity.x < 0 )
     {
@@ -305,12 +308,33 @@ private function UpdateFunction () {
    if(swording)
    {
    		anim.SetInteger("Direction", 10);
+   		
+   		Debug.Log(direction_facing);   		
+   		switch(direction_facing)
+   		{
+   			case 1:
+   				meleeObject.GetComponent(typeof(Transform)).localPosition= Vector3(0.764,0,0);
+   			break;
+   			case 2:
+   				meleeObject.GetComponent(typeof(Transform)).localPosition= Vector3(0.08,0,-0.74);
+   			break;
+   			case 4:
+   				meleeObject.GetComponent(typeof(Transform)).localPosition= Vector3(-0.78,0,0);
+
+   			break;
+   			case 8:
+   				meleeObject.GetComponent(typeof(Transform)).localPosition= Vector3(0.08,0,0.85);
+   			break;	
+   		}
    		attacking=true;
+   		meleeObject.SetActive(true);   		
    		SetVelocity(Vector3.zero);
    		canControl=false;
-   		yield WaitForSeconds(0.3);
+   		yield WaitForSeconds(0.4);
    		canControl=true;
-   		attacking= false;   		
+   		meleeObject.SetActive(false);
+   		attacking= false;
+   		//
    }
    else
 	   if(velocity.z==0 && velocity.x==0)
@@ -453,7 +477,7 @@ private function UpdateFunction () {
 public function DisableEffects ()
 {
     // Disable the line renderer and the light.
-    meleeLine.enabled = false;
+    //meleeLine.enabled = false;
     //gunLight.enabled = false;
 }
 public function Melee ()
@@ -472,13 +496,13 @@ public function Melee ()
     gunParticles.Play ();*/
 
     // Enable the line renderer and set it's first position to be the end of the gun.
-    meleeLine.enabled = true;
-    meleeLine.SetPosition (0, transform.position);
+    //meleeLine.enabled = true;
+    //meleeLine.SetPosition (0, transform.position);
 
     // Set the shootRay so that it starts at the end of the gun and points forward from the barrel.
-    meleeRay.origin = transform.position;
+    /*meleeRay.origin = transform.position;
     meleeRay.direction = transform.forward;
-    meleeLine.SetPosition (1, meleeRay.origin + meleeRay.direction * meleeRange);
+    meleeLine.SetPosition (1, meleeRay.origin + meleeRay.direction * meleeRange);*/
 
     // Perform the raycast against gameobjects on the shootable layer and if it hits something...
     /*if(Physics.Raycast (shootRay, shootHit, range, shootableMask))
