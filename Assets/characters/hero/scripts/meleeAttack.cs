@@ -10,13 +10,14 @@ public class meleeAttack : MonoBehaviour {
 	Animator anim;
 	GameObject player;
 	EnemyHealth enemyHealth;
+	CharacterMotor characterMotor;
 	bool enemyInRange;
-	GameObject enemy;	
+	private GameObject enemy;	
 	float timer;
 	
 	void Awake () {		
 		player = GameObject.FindGameObjectWithTag("Player");		
-		//anim = GetComponent<Animator>();
+		characterMotor = player.GetComponent<CharacterMotor>();
 	}
 	
 	void OnTriggerEnter(Collider other)
@@ -26,13 +27,14 @@ public class meleeAttack : MonoBehaviour {
 			enemy = other.gameObject;
 			enemyInRange= true;
 			enemyHealth = enemy.GetComponent<EnemyHealth>();
+
 		}
 		
 	}
 	
 	void OnTriggerExit(Collider other)
 	{
-		if(other.gameObject == player)
+		if(other.tag=="atacable")
 		{
 			enemyInRange = false;
 		}
@@ -41,15 +43,12 @@ public class meleeAttack : MonoBehaviour {
 	void Update () {
 		timer += Time.deltaTime;
 		
-		if(timer >= timeBetweenAttacks && enemyInRange)
+		if(timer >= timeBetweenAttacks && enemyInRange && characterMotor.swording)
 		{			
 			Attack();
 		}
 
-		if(enemyHealth.currentHealth <=0)
-		{
-			//anim.setTrigger("playerDead");
-		}
+		
 	}
 
 	void Attack()

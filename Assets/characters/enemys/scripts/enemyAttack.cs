@@ -17,14 +17,16 @@ public class enemyAttack : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerHealth = player.GetComponent<PlayerHealth>();
 		//anim = GetComponent<Animator>();
+		anim = transform.Find("animContainer/animations").GetComponent <Animator>();
 	}
 	
 	void OnTriggerEnter(Collider other)
 	{
-		Debug.Log("me pego:"+other.tag);
+		
 		if(other.gameObject == player)
 		{			
 			playerInRange = true;
+			anim.SetBool("close_to_player",true);
 		}
 	}
 	
@@ -33,6 +35,7 @@ public class enemyAttack : MonoBehaviour {
 		if(other.gameObject == player)
 		{
 			playerInRange = false;
+			anim.SetBool("close_to_player",false);
 		}
 	}
 	// Update is called once per frame
@@ -53,7 +56,7 @@ public class enemyAttack : MonoBehaviour {
 	void Attack()
 	{
 		timer = 0f;
-
+		
 		if( playerHealth.currentHealth > 0)
 		{
 			playerHealth.TakeDamage(attackDamage);
