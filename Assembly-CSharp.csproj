@@ -49,7 +49,12 @@
      <Compile Include="Assets\characters\enemys\scripts\EnemyHealth.cs" />
      <Compile Include="Assets\characters\enemys\scripts\enemyAttack.cs" />
      <Compile Include="Assets\characters\hero\scripts\PlayerHealth.cs" />
+     <Compile Include="Assets\characters\hero\scripts\PlayerInteractions.cs" />
+     <Compile Include="Assets\characters\hero\scripts\Quest.cs" />
+     <Compile Include="Assets\characters\hero\scripts\QuestHolder.cs" />
+     <Compile Include="Assets\characters\hero\scripts\QuestManager.cs" />
      <Compile Include="Assets\characters\hero\scripts\meleeAttack.cs" />
+     <Compile Include="Assets\characters\npc\scripts\NPCInteract.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

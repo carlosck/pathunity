@@ -24,7 +24,8 @@ private var meleeRay : Ray;                                   // A ray from the 
 private var meleeHit : RaycastHit;                            // A raycast hit to get information about what was hit.
 private var hitableMask : int; 
 
-
+var InteractiveInRange : boolean = false;
+var interacting : boolean = false;
 var meleeObject: GameObject;
 var melee_move: Transform;
 var animations: GameObject;
@@ -227,11 +228,19 @@ private function CheckInputs()
      {     	
      	running=false;
      }
-
-     if (Input.GetKey("x") && (timer >= timeBetweenMelee)){        
-                  
-         Melee();          
+     if(Input.GetKey("x") && InteractiveInRange)
+     {
+     	interacting= true;
      }
+     else
+     {
+     	interacting= false;
+     	if (Input.GetKey("x") && (timer >= timeBetweenMelee)){        
+     	             
+     	    Melee();          
+     	}
+     }
+     
      
      
 }
