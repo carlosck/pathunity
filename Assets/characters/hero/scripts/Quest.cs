@@ -16,9 +16,7 @@ public class Quest: MonoBehaviour
 
 	public void init()
 	{		
-		gameObject.SetActive(true);
-		Debug.Log(transform.parent);
-		//questGiver=
+		gameObject.SetActive(true);		
 	}
 	
 	public void setQuestGiver(NPCInteract qg)
