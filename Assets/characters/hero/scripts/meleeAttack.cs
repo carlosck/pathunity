@@ -9,7 +9,7 @@ public class meleeAttack : MonoBehaviour {
 
 	Animator anim;
 	GameObject player;
-	EnemyHealth enemyHealth;
+	HealthSystem enemyHealth;
 	CharacterMotor characterMotor;
 	bool enemyInRange;
 	private GameObject enemy;	
@@ -26,7 +26,7 @@ public class meleeAttack : MonoBehaviour {
 		{
 			enemy = other.gameObject;
 			enemyInRange= true;
-			enemyHealth = enemy.GetComponent<EnemyHealth>();
+			enemyHealth = enemy.GetComponent<HealthSystem>();
 
 		}
 		

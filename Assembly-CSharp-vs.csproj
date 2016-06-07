@@ -46,8 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\characters\enemys\scripts\EnemyHealth.cs" />
      <Compile Include="Assets\characters\enemys\scripts\enemyAttack.cs" />
+     <Compile Include="Assets\characters\enemys\scripts\enemyHealth.cs" />
      <Compile Include="Assets\characters\hero\scripts\PlayerHealth.cs" />
      <Compile Include="Assets\characters\hero\scripts\PlayerInteractions.cs" />
      <Compile Include="Assets\characters\hero\scripts\Quest.cs" />

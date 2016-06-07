@@ -61,7 +61,7 @@ public class NPCInteract : MonoBehaviour
 	}
 	public void startTalking()
 	{
-		questTextContainer.active=true;
+		questTextContainer.SetActive(true);
 		playerInteractions.StartInteracting();
 		busyInteracting= true;
 		dialogs =dialogs_spanish;
@@ -70,7 +70,7 @@ public class NPCInteract : MonoBehaviour
 	}
 	public void StartWaitingQuestTalk()
 	{
-		questTextContainer.active=true;
+		questTextContainer.SetActive(true);
 		playerInteractions.StartInteracting();
 		busyInteracting= true;
 		dialogs=currentQuest.questTextWaiting;
@@ -79,7 +79,7 @@ public class NPCInteract : MonoBehaviour
 	}
 	public void StartRewardQuestTalk()
 	{
-		questTextContainer.active=true;
+		questTextContainer.SetActive(true);
 		playerInteractions.StartInteracting();
 		busyInteracting= true;
 		dialogs=currentQuest.questTextReward;
@@ -90,7 +90,7 @@ public class NPCInteract : MonoBehaviour
 	{		
 		currentQuest = quests[0].GetComponent <Quest>();
 		currentQuest.setQuestGiver(this);
-		questTextContainer.active=true;
+		questTextContainer.SetActive(true);
 		playerInteractions.StartInteracting();
 		busyInteracting= true;
 		dialogs=currentQuest.questTextInit;
@@ -124,7 +124,7 @@ public class NPCInteract : MonoBehaviour
 
 	void shut()
 	{
-		questTextContainer.active=false;
+		questTextContainer.SetActive(false);
 		busyInteracting= false;
 		playerInteractions.StopInteracting();
 	}

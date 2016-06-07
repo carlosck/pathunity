@@ -23,7 +23,7 @@ public class QuestManager: MonoBehaviour
 		//find in all quest if a the enemy killed is part of a quest
 		while(!found && cont_quest<quests.Count)
 		{
-			int cont_enemies=0;
+			
 			foreach(Transform child in quests[cont_quest].transform.Find("Enemies"))
 			{
 				
