@@ -10,23 +10,35 @@ public class Quest: MonoBehaviour
 	public string[] questTextReward;
 	GameObject[] enemys;
 	public GameObject[] objects;
-	NPCInteract questGiver;
+	GameObject questGiver;
+	public bool isGoToTalkSomeone;
+	public GameObject questReceiver= null;
 
 	public GameObject reward;
 
 	public void init()
 	{		
-		gameObject.SetActive(true);		
+		gameObject.SetActive(true);
 	}
 	
-	public void setQuestGiver(NPCInteract qg)
+	public void setQuestGiver(GameObject qg)
 	{
 		questGiver= qg;
 	}
 
-	public NPCInteract getQuestGiver()
+	public void setQuestReceiver(GameObject qr)
+	{
+		questReceiver= qr;
+	}
+
+	public GameObject getQuestGiver()
 	{
 		return questGiver;
+	}
+
+	public GameObject getQuestReceiver()
+	{
+		return questReceiver;
 	}
 	
 

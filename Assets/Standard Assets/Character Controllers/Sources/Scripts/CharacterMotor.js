@@ -11,7 +11,7 @@ var facing_left : boolean = false ;
 var direction_facing : int = 1;
 var walkSpeed: int = .5; // regular speed
 var runSpeed: int = 2; // run speed
-
+var isDead: boolean= false;
 var Tempvelocity : Vector3;
 var swording : boolean = false;
 var attacking : boolean = false;
@@ -276,8 +276,12 @@ private function  SetAnimation(velocity : Vector3)
      	if(running)
      		anim.SetInteger("Direction", 2);
      	else
+     	{
      		anim.SetInteger("Direction", 1);
-        facing_left = true;
+     		
+     	}
+     		
+        
         direction_facing=8;
     }
     if(velocity.z < 0 )
@@ -285,8 +289,12 @@ private function  SetAnimation(velocity : Vector3)
     	if(running)
      		anim.SetInteger("Direction", 6);
      	else
+     	{
+     		
      		anim.SetInteger("Direction", 5);
-        facing_left = true;
+     	}
+     		
+        
         direction_facing=2;
     } 
    }
@@ -509,9 +517,13 @@ public function Melee()
 
 	SetVelocity(Vector3.zero);	
 	yield WaitForSeconds(0.35);
+	if(!isDead)
+	{	
+		canControl=true;
+	}
 	swording=false;
 	attacking= false;		
-	canControl=true;
+	
 	timer = 0f;
 		 		   		   		   
 
@@ -556,6 +568,44 @@ public function Melee()
         // ... set the second position of the line renderer to the fullest extent of the gun's range.
         meleeLine.SetPosition (1, shootRay.origin + shootRay.direction * range);
     }*/
+}
+
+public function Die()
+{
+    // Reset the timer.    
+    Debug.Log("----- DIE ------");
+    attacking= false;
+    canControl= false;
+    isDead= true;
+    anim.SetInteger("Direction", 100);
+    
+    Debug.Log(direction_facing);
+    SetVelocity(Vector3.zero);
+    if(facing_left)
+    {
+    	anim.SetBool("is_dead_left_player", true);
+    }
+    else
+    {
+    	anim.SetBool("is_dead_right_player", true);
+    }
+    /*
+    switch(direction_facing)
+	{
+		case 1:
+			anim.SetBool("is_dead_left", true); 
+		break;
+		case 2:
+			anim.SetBool("is_dead_left", true); 
+		break;
+		case 4:
+			anim.SetBool("is_dead_left", true); 
+		break;
+		case 8:
+			anim.SetBool("is_dead_right", true); 
+		break;	
+	} 
+	*/
 }
 
 function FixedUpdate () {

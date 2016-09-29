@@ -6,8 +6,7 @@ public class QuestHolder: MonoBehaviour
 {
 	
 	public List<Quest> quests;
-	
-	
+		
 
 	public void addQuest(Quest quest)
 	{

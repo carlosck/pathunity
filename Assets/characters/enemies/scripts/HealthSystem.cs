@@ -17,6 +17,9 @@ public class HealthSystem : MonoBehaviour {
 	GameObject damage_enemy;
 	QuestManager questManager;
 	Transform enemy_transform;
+	SpriteRenderer renderer;
+	CharacterMotor characterMotor;
+	
 	// Use this for initialization
 	void Start () {
 	
@@ -28,7 +31,9 @@ public class HealthSystem : MonoBehaviour {
 	}
 	void Awake()
 	{
+		enemy_transform= GetComponent<Transform>();	
 		anim = transform.Find("animContainer/animations").GetComponent <Animator>();
+		characterMotor = GetComponent<CharacterMotor>();
 		questManager = GameObject.FindGameObjectWithTag("Player").GetComponent <QuestManager>();
 		anim.speed= Random.Range(0.8f,1.2f);
 		healthSlider = transform.Find("Canvas/HealtSlider").GetComponent <Slider>();
@@ -36,7 +41,8 @@ public class HealthSystem : MonoBehaviour {
 		currentHealth = startingHealth;	
 		HealthTextPercent.text = currentHealth.ToString() ;
 		damage_enemy = (GameObject)Resources.Load ("prefabs/damage_enemy", typeof(GameObject));
-		enemy_transform= GetComponent<Transform>();	
+		renderer = transform.Find("animContainer/animations").GetComponent <SpriteRenderer>();
+		
 	}
 	
 
@@ -53,14 +59,19 @@ public class HealthSystem : MonoBehaviour {
 			damaged = true;
 			currentHealth -= total_damage;
 		}
-				
+		
+			
 		ShowDamage(total_damage);	
+
 		
 		if(currentHealth>0)
 		{
 			
 			HealthTextPercent.text = currentHealth.ToString() ;
 			healthSlider.value = currentHealth;
+			StartCoroutine(showRed());
+			
+
 		}
 		else
 		{
@@ -77,10 +88,13 @@ public class HealthSystem : MonoBehaviour {
 	void Death()
 	{
 		isDead = true;
-		anim.SetTrigger("is_dead");		
+		anim.SetInteger("Direction", 0);
+		characterMotor.Die();
+		
 		bool isPartOfaQuest= questManager.enemyKilled(gameObject);
-		if(!isPartOfaQuest)
-			Destroy(this.gameObject,1f);		
+		
+		//if(!isPartOfaQuest)
+			Destroy(this.gameObject,2f);		
 	}
 
 	void ShowDamage(int amount)
@@ -94,4 +108,12 @@ public class HealthSystem : MonoBehaviour {
 		dmg_txt.text= amount+" "; 
 		Destroy(show_dmg.gameObject,1.1f);
 	}
+	
+	IEnumerator showRed()
+	{		
+		renderer.color = new Color(1f, 0f, 0f, 1f);
+		yield return new WaitForSeconds(0.5f);
+		renderer.color = new Color(1f, 1f, 1f, 1f);		
+    }
+
 }

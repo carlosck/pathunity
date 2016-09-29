@@ -76,11 +76,14 @@ public class PlayerInteractions : MonoBehaviour
 	{
 		characterMotor.canControl= true;
 	}
+
 	public void setQuest(Quest quest)
-	{
-		Debug.Log(quests);
-		questManager.addQuest(quest);
-		//quests.Add(quest);
-		//quest.init();
+	{		
+		questManager.addQuest(quest);		
+	}
+	
+	public void finishQuest(Quest quest)
+	{		
+		questManager.finishQuest(quest);		
 	}
 }

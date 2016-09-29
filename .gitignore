@@ -4,3 +4,7 @@ _Gizmos*
 Temp/*
 Library/metadata/*
 
+
+pathunity.userprefs
+
+ProjectSettings/GraphicsSettings.asset

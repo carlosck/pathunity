@@ -15,6 +15,9 @@ public class PlayerHealth : MonoBehaviour
 	public Transform show_damage;
 	GameObject player;
 	Transform player_transform;
+	CharacterMotor characterMotor;
+	SpriteRenderer renderer;
+
 
 	void Awake()
 	{
@@ -22,6 +25,8 @@ public class PlayerHealth : MonoBehaviour
 		currentHealth = startingHealth;	
 		player = GameObject.FindGameObjectWithTag("Player");
 		player_transform= player.GetComponent<Transform>();
+		characterMotor = player.GetComponent<CharacterMotor>();
+		renderer = transform.Find("animations").GetComponent <SpriteRenderer>();
 		//childObject.transform.parent.gameObject	
 	}
 
@@ -33,6 +38,8 @@ public class PlayerHealth : MonoBehaviour
 	public void TakeDamage(int amount)
 	{
 		if(isDead) {return ;}
+
+
 		
 		int total_damage = amount-defense;
 		if(total_damage<=0)
@@ -50,6 +57,7 @@ public class PlayerHealth : MonoBehaviour
 			
 			HealthTextPercent.text = currentHealth.ToString() ;
 			healthSlider.value = currentHealth;
+			StartCoroutine(showRed());
 		}
 		else
 		{
@@ -57,14 +65,18 @@ public class PlayerHealth : MonoBehaviour
 			healthSlider.value = 0;
 			if(currentHealth <= 0 && !isDead)
 			{
-				Death();
+				Die();
 			}
 		}
 	}
 
-	void Death()
+	void Die()
 	{
+		
 		isDead = true;
+
+		characterMotor.Die();
+		
 
 	}
 	void ShowDamage(int amount)
@@ -79,4 +91,10 @@ public class PlayerHealth : MonoBehaviour
 		Destroy(show_dmg.gameObject,1.1f);
 
 	}
+	IEnumerator showRed()
+	{		
+		renderer.color = new Color(1f, 0f, 0f, 1f);
+		yield return new WaitForSeconds(0.5f);
+		renderer.color = new Color(1f, 1f, 1f, 1f);		
+    }
 }
