@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
 	public Slider healthSlider;
 	public Text HealthTextPercent;
 	public int defense = 0;
+	public GameObject fadeObj ;
 	Animator anim;
 	bool isDead;
 	bool damaged;	
@@ -76,8 +77,14 @@ public class PlayerHealth : MonoBehaviour
 		isDead = true;
 
 		characterMotor.Die();
-		
+		StartCoroutine(cortinilla());
 
+	}
+	IEnumerator cortinilla()
+	{	
+		yield return new WaitForSeconds(3f);
+		Instantiate(fadeObj, new Vector3(0, 0, 0), Quaternion.identity); // The Instantiate command takes a GameObject, a Vector3 for position and a Quaternion for rotation.  		
+		yield return new WaitForSeconds(1f);
 	}
 	void ShowDamage(int amount)
 	{
