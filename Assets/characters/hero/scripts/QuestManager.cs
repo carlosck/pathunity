@@ -7,6 +7,8 @@ public class QuestManager: MonoBehaviour
 	
 	public List<Quest> quests;
 	
+	
+
 	public void addQuest(Quest quest)
 	{		
 		quests.Add(quest);
@@ -79,6 +81,6 @@ public class QuestManager: MonoBehaviour
 			
 		}
 	}
-	
 
 }
+

@@ -19,9 +19,8 @@ public class NPCInteract : MonoBehaviour
 	public GameObject questTextContainer;
 	public GameObject player;
 	public List <Quest> quests;
-	public Quest currentQuest;
-
-
+	public Quest currentQuest;	
+	public QuestContainer gameQuestContainer;
 	PlayerInteractions playerInteractions;
 	GameObject QuestSection;
 	Text talkText;
@@ -35,7 +34,7 @@ public class NPCInteract : MonoBehaviour
 	void Awake()
 	{
 		player = GameObject.FindGameObjectWithTag("Player");		
-		playerInteractions = player.transform.Find("Quest").GetComponent <PlayerInteractions>();
+		playerInteractions = player.transform.Find("QuestInteract").GetComponent <PlayerInteractions>();
 		talkText= (Text) questTextContainer.transform.Find("QuestTextPanel/Text").GetComponent <Text>();
 		nameShadow= (Text) questTextContainer.transform.Find("QuestTextPanel/nombre_pj_shadow").GetComponent <Text>();
 		name= (Text) questTextContainer.transform.Find("QuestTextPanel/nombre_pj").GetComponent <Text>();
@@ -48,7 +47,7 @@ public class NPCInteract : MonoBehaviour
 		{
 			transform.Find("QuestSection/Give").gameObject.SetActive(true);
 			currentQuest= quests[0];
-			waitingForQuest= false;
+			//waitingForQuest= false;
 			/*Debug.Log(asd);
 			asd.gameObject.SetActive(true);*/
 		}
@@ -204,6 +203,8 @@ public class NPCInteract : MonoBehaviour
 		{
 			checkForQuest();
 		}
+
+		gameQuestContainer.nextQuest();
 		
 	}
 
@@ -215,5 +216,12 @@ public class NPCInteract : MonoBehaviour
 		currentQuest= quest;
 		hasQuest= true;		
 		readyForTurnQuest= true;
+	}
+	public void addQuest(Quest quest)
+	{
+		quests.Add(quest);
+		hasQuest= true;
+		waitingForQuest= true;
+		checkForQuest();
 	}
 }

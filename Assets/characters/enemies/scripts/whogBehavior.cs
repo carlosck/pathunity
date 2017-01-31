@@ -7,7 +7,7 @@ public class whogBehavior : behavior {
 	
 	// Use this for initialization
 
-	Animator anim;
+	
 	GameObject player;
 
 	PlayerHealth playerHealth;

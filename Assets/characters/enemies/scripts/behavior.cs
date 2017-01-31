@@ -7,7 +7,7 @@ public class behavior : MonoBehaviour {
 	
 	// Use this for initialization
 
-	Animator anim;
+	public Animator anim;
 	GameObject player;
 
 	PlayerHealth playerHealth;

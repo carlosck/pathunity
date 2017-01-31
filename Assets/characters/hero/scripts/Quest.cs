@@ -5,14 +5,16 @@ using System.Collections;
 public class Quest: MonoBehaviour
 {
 	public bool completed=false;
+	public GameObject playerStartAt;
 	public string[] questTextInit;
 	public string[] questTextWaiting;
 	public string[] questTextReward;
 	GameObject[] enemys;
 	public GameObject[] objects;
-	GameObject questGiver;
 	public bool isGoToTalkSomeone;
+	public GameObject questGiver;
 	public GameObject questReceiver= null;
+	public GameObject cam;
 
 	public GameObject reward;
 
@@ -39,6 +41,14 @@ public class Quest: MonoBehaviour
 	public GameObject getQuestReceiver()
 	{
 		return questReceiver;
+	}
+	public GameObject getInitPosition()
+	{
+		return playerStartAt;
+	}
+	public GameObject getCam()
+	{
+		return cam;
 	}
 	
 
