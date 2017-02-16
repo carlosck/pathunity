@@ -68,7 +68,7 @@
      <None Include="Assets\UI\fonts\OT_TT_Install_E.txt" />
      <None Include="Assets\UI\fonts\PT Free Font License_rus_1.2.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>/Users/Seca/Public/wworks/thepathofthebrave/pathunity/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ <HintPath>/Users/sebastian/Desktop/pathunity/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
