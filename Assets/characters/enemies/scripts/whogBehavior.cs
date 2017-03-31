@@ -15,7 +15,7 @@ public class whogBehavior : behavior {
 	bool playerInRange;
 	bool running = false;
 	bool tired = false;
-	NavMeshAgent agent;
+	UnityEngine.AI.NavMeshAgent agent;
 	Vector3 playerTemporalPosition ;
 	float tiredTime;
 	bool facing_left= false;
@@ -23,7 +23,7 @@ public class whogBehavior : behavior {
 	void Awake () {		
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerHealth = player.GetComponent<PlayerHealth>();
-		agent =GetComponent <NavMeshAgent>();
+		agent =GetComponent <UnityEngine.AI.NavMeshAgent>();
 		//anim = GetComponent<Animator>();
 		anim = transform.Find("animContainer/animations").GetComponent <Animator>();
 		health = GetComponent <HealthSystem>();

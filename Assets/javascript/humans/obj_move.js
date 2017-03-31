@@ -4,12 +4,12 @@ public var patrolWayPoints : Transform[];
 public var patrolWaitTime : float = 5f;
 
 
-private var agent : NavMeshAgent;
+private var agent : UnityEngine.AI.NavMeshAgent;
 private var patrolTimer : float;
 private var wayPointIndex : int;
 
 function Awake () {
- agent = GetComponent(typeof(NavMeshAgent)) as NavMeshAgent;
+ agent = GetComponent(typeof(UnityEngine.AI.NavMeshAgent)) as UnityEngine.AI.NavMeshAgent;
  
 
  agent.SetDestination(patrolWayPoints[wayPointIndex].position);

@@ -7,32 +7,15 @@ public class Intro : MonoBehaviour {
 	public GameObject container;
 	UIActions ps;
 	public GameObject introVideo;
-	MovieTexture mt;
+	
 	public GameObject fadeObj ;
 	// Use this for initialization
 	void Awake () {
-		//introVideo.SetActive(true);
-		RawImage rim = introVideo.GetComponent<RawImage>();
-		mt = (MovieTexture)rim.mainTexture;		
+		//introVideo.SetActive(true);		
 		ps= container.GetComponent<UIActions>();
 	}
 		
-
-	void Start()
-	{
-		mt.Play();
-		StartCoroutine(FindEnd());
-	}
-	private IEnumerator FindEnd()
-	{
-		while(mt.isPlaying)
-		{
-		yield return 0;
-		}
-
-		endIntroVideo();
-		yield break;
-	}
+	
 
 	void endIntroVideo()
 	{

@@ -1,9 +1,9 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{E0D5461A-147B-C325-08CA-6EC9563901C4}") = "pathunity", "Assembly-CSharp-firstpass.csproj", "{E3D95E89-022E-FADA-995C-33535F90AF31}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pathunity", "Assembly-CSharp-firstpass.csproj", "{E3D95E89-022E-FADA-995C-33535F90AF31}"
 EndProject
-Project("{E0D5461A-147B-C325-08CA-6EC9563901C4}") = "pathunity", "Assembly-CSharp.csproj", "{AAE10059-FB45-6E85-1F1A-F1CE0390D722}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pathunity", "Assembly-CSharp.csproj", "{AAE10059-FB45-6E85-1F1A-F1CE0390D722}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

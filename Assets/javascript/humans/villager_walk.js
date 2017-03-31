@@ -5,12 +5,12 @@ public var patrolWaitTime : float = 5f;
 var anim : Animator;
 var facing_left : boolean=false;
 
-private var agent : NavMeshAgent;
+private var agent : UnityEngine.AI.NavMeshAgent;
 private var patrolTimer : float;
 private var wayPointIndex : int;
 
 function Awake () {
- agent = GetComponent(typeof(NavMeshAgent)) as NavMeshAgent;
+ agent = GetComponent(typeof(UnityEngine.AI.NavMeshAgent)) as UnityEngine.AI.NavMeshAgent;
  anim = transform.Find("animator_container").GetComponent(typeof(Animator)) as Animator;
 
  agent.SetDestination(patrolWayPoints[wayPointIndex].position);

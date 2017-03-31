@@ -6,28 +6,39 @@ using System.Collections;
 public class UIActions : MonoBehaviour {
 
 	public GameObject menu;
+	public GameObject gameOver;
 	main_menu ms;
-	public GameObject intro;	
-	
+	gameOver_menu gom;
+	public GameObject intro;
+	public GameObject healtUi;	
+	bool isGameOver;
 	// Use this for initialization
 	
 	void Awake () {							
 		ms= menu.GetComponent<main_menu>();
+		gom= gameOver.GetComponent<gameOver_menu>();
 		Time.timeScale = 0;
+		isGameOver= true;
 	}
 	
 	void Update () {
 		if (Input.GetKeyDown("return"))
 		{
 			print("enter");
-			if(ms.busy)
-			{
-				ms.selectMenu();
+			if(isGameOver){
+				gom.selectMenu();
 			}
-			else
-			{
-				showMenu();			
+			else{
+				if(ms.busy)
+				{
+					ms.selectMenu();
+				}
+				else
+				{
+					showMenu();			
+				}
 			}
+			
 		}
 	}
 
@@ -39,6 +50,7 @@ public class UIActions : MonoBehaviour {
 		ms.busy= true;
 		menu.SetActive(true);
 		Time.timeScale = 0;
+		healtUi.SetActive(false);
 	}
 	public void closeMenu()
 	{
@@ -46,10 +58,20 @@ public class UIActions : MonoBehaviour {
 		menu.SetActive(false);
 		ms.busy= false;
 		Time.timeScale = 1;
+		healtUi.SetActive(true);
+	}
+
+	public void GameOverContinue()
+	{
+		print("closeMenu");
+		gameOver.SetActive(false);
+		gom.busy= false;
+		Time.timeScale = 1;
+		healtUi.SetActive(true);
 	}
 	public void showIntroVideo()
 	{
-		print("showIntroVideo");
+		print("showIntro");
 		menu.SetActive(false);
 		intro.SetActive(true);
 		ms.busy= false;		
@@ -58,6 +80,7 @@ public class UIActions : MonoBehaviour {
 	{
 		print("hideIntro");
 		intro.SetActive(false);
+		healtUi.SetActive(true);
 		Time.timeScale = 1;
 	}
 

@@ -1,11 +1,11 @@
 
-var agent : NavMeshAgent;
+var agent : UnityEngine.AI.NavMeshAgent;
 var player : GameObject;
 var anim : Animator;
 var facing_left : boolean=false; 
 function Awake()
 {
-  agent = GetComponent(typeof(NavMeshAgent)) as NavMeshAgent;
+  agent = GetComponent(typeof(UnityEngine.AI.NavMeshAgent)) as UnityEngine.AI.NavMeshAgent;
   anim = transform.Find("animator_container").GetComponent(typeof(Animator)) as Animator;
 }
 

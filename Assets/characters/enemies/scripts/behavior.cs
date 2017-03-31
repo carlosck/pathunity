@@ -15,7 +15,7 @@ public class behavior : MonoBehaviour {
 	bool playerInRange;
 	bool running = false;
 	bool tired = false;
-	NavMeshAgent agent;
+	UnityEngine.AI.NavMeshAgent agent;
 	Vector3 playerTemporalPosition ;
 	float tiredTime;
 	bool facing_left= false;
