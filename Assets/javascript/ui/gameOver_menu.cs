@@ -9,7 +9,7 @@ public class gameOver_menu : MonoBehaviour {
 	public GameObject select_no; 
 		
 	
-	public QuestContainer gameQuestContainer;
+	
 	//public Animator animMenu; 
 
 	public bool busy= true;
@@ -65,12 +65,9 @@ public class gameOver_menu : MonoBehaviour {
 		switch(current_position)
 		{
 			case 0: 
-				if(gameQuestContainer.currentQuestId>0){
-					continueGame();
-				}
-			break;
-			case 1: 
 				continueGame();
+			break;
+			case 1: 				
 				quitGame();
 			break;			
 		}
@@ -79,8 +76,7 @@ public class gameOver_menu : MonoBehaviour {
 	{
 		print("continue");
 		ui.GameOverContinue();
-		//Quest currentQuest=questContainer.getQuestAt(0);
-		gameQuestContainer.continueGame();
+		//Quest currentQuest=questContainer.getQuestAt(0);		
 		
 	}
 	void GameOverClose()
@@ -97,19 +93,11 @@ public class gameOver_menu : MonoBehaviour {
 	}
 
 	
-	public void Start()
-	{
-		print("quest");
-		print(gameQuestContainer.currentQuestId);
-		
-	}
+	
 	public bool isBusy(){
 		return busy;
 	}
-	public void endIntroEscene()
-	{
-		ui.showIntroVideo();
-	}
+	
 }
 
 

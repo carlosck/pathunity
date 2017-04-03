@@ -589,25 +589,16 @@ public function Die()
     {
     	anim.SetBool("is_dead_right_player", true);
     }
-    /*
-    switch(direction_facing)
-	{
-		case 1:
-			anim.SetBool("is_dead_left", true); 
-		break;
-		case 2:
-			anim.SetBool("is_dead_left", true); 
-		break;
-		case 4:
-			anim.SetBool("is_dead_left", true); 
-		break;
-		case 8:
-			anim.SetBool("is_dead_right", true); 
-		break;	
-	} 
-	*/
 }
-
+public function Revive(){
+	Debug.Log("----- Revive ------");
+	anim.SetBool("is_dead_left_player", false);
+	anim.SetBool("is_dead_right_player", false);
+	attacking= false;
+	canControl= true;
+	isDead= false;
+    anim.SetInteger("Direction", 3);
+}
 function FixedUpdate () {
 	if (movingPlatform.enabled) {
 		if (movingPlatform.activePlatform != null) {

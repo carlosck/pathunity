@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
 	public Text HealthTextPercent;
 	public int defense = 0;
 	public GameObject fadeObj ;
+	public UIActions ui;
 	Animator anim;
 	bool isDead;
 	bool damaged;	
@@ -56,8 +57,8 @@ public class PlayerHealth : MonoBehaviour
 		if(currentHealth>0)
 		{
 			
-			HealthTextPercent.text = currentHealth.ToString() ;
-			healthSlider.value = currentHealth;
+			
+			updateHealthBar();
 			StartCoroutine(showRed());
 		}
 		else
@@ -77,7 +78,7 @@ public class PlayerHealth : MonoBehaviour
 		isDead = true;
 
 		characterMotor.Die();
-		StartCoroutine(cortinilla());
+		ui.playerDeath();
 
 	}
 	IEnumerator cortinilla()
@@ -103,5 +104,16 @@ public class PlayerHealth : MonoBehaviour
 		renderer.color = new Color(1f, 0f, 0f, 1f);
 		yield return new WaitForSeconds(0.5f);
 		renderer.color = new Color(1f, 1f, 1f, 1f);		
+    }
+    public void restart()
+    {
+    	currentHealth = startingHealth;
+    	isDead = false;
+    	updateHealthBar();
+    	characterMotor.Revive();
+    }
+    public void updateHealthBar(){
+    	HealthTextPercent.text = currentHealth.ToString() ;
+    	healthSlider.value = currentHealth;
     }
 }

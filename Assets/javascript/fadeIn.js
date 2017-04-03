@@ -1,5 +1,5 @@
 ﻿var fadeTexture : Texture;
-var startColor : Color = Color(0,0,0,1);
+var startColor : Color = Color(255,0,0,1);
 var endColor : Color = Color(0,0,0,1);
 var duration : float = 0.8;
 var activo : boolean = false;

@@ -10,6 +10,7 @@ public class QuestContainer: MonoBehaviour
 	public List<Quest> quests;
 
 	public GameObject player;
+	PlayerHealth playerHealth;
 	QuestManager questManagerPlayer;
 	GameObject npc;
 	NPCInteract npcInteract;
@@ -22,6 +23,7 @@ public class QuestContainer: MonoBehaviour
 	public void Awake()
 	{
 		questManagerPlayer=player.GetComponent <QuestManager>();
+		playerHealth=player.GetComponent <PlayerHealth>();
 		Load();	
 	}
 	public Quest getQuestAt(int i)
@@ -55,6 +57,7 @@ public class QuestContainer: MonoBehaviour
 
 	public void continueGame()
 	{
+		playerHealth.restart();
 		startQuestAt(currentQuestId);
 	}
 	public void startGame()

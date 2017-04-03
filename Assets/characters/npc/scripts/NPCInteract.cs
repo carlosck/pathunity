@@ -219,6 +219,9 @@ public class NPCInteract : MonoBehaviour
 	}
 	public void addQuest(Quest quest)
 	{
+		if(quest.GetInstanceID()!= currentQuest.GetInstanceID()){
+			return ;
+		}
 		quests.Add(quest);
 		hasQuest= true;
 		waitingForQuest= true;
