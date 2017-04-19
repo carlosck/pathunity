@@ -15,7 +15,7 @@ public class EnemyHealth : MonoBehaviour {
 	bool damaged;
 	public Transform show_damage;
 	GameObject damage_enemy;
-	QuestManager questManager;
+	QuestContainer quest_container;
 	Transform enemy_transform;
 	// Use this for initialization
 	void Start () {
@@ -28,8 +28,7 @@ public class EnemyHealth : MonoBehaviour {
 	}
 	void Awake()
 	{
-		anim = transform.Find("animContainer/animations").GetComponent <Animator>();
-		questManager = GameObject.FindGameObjectWithTag("Player").GetComponent <QuestManager>();
+		anim = transform.Find("animContainer/animations").GetComponent <Animator>();		
 		anim.speed= Random.Range(0.8f,1.2f);
 		healthSlider = transform.Find("Canvas/HealtSlider").GetComponent <Slider>();
 		healthSlider.maxValue = startingHealth;
@@ -78,7 +77,7 @@ public class EnemyHealth : MonoBehaviour {
 	{
 		isDead = true;
 		anim.SetTrigger("is_dead");		
-		bool isPartOfaQuest= questManager.enemyKilled(gameObject);
+		bool isPartOfaQuest= quest_container.enemyKilled(gameObject);
 		if(!isPartOfaQuest)
 			Destroy(this.gameObject,1f);		
 	}

@@ -140,14 +140,14 @@ public class NPCInteract : MonoBehaviour
 			if(readyForTurnQuest)
 			{
 				waitingForQuest=false;
-				playerInteractions.finishQuest(currentQuest);
+				gameQuestContainer.finishQuest(currentQuest);
 				finishQuest();
 			}
 			else
 				if(hasQuest)
 				{
 					waitingForQuest=true;
-					playerInteractions.setQuest(currentQuest);
+					//playerInteractions.setQuest(currentQuest);
 				}
 			shut();
 		}
@@ -177,7 +177,7 @@ public class NPCInteract : MonoBehaviour
 		Quest quest= currentQuest;
 		readyForTurnQuest = false;
 		Debug.Log("finishQuest");	
-
+		contTalk = 0;
 		GameObject qg = quest.getQuestGiver();
 		GameObject qr = quest.getQuestReceiver();
 				
@@ -203,7 +203,7 @@ public class NPCInteract : MonoBehaviour
 		{
 			checkForQuest();
 		}
-
+		busyInteracting = false;
 		gameQuestContainer.nextQuest();
 		
 	}
@@ -219,9 +219,9 @@ public class NPCInteract : MonoBehaviour
 	}
 	public void addQuest(Quest quest)
 	{
-		if(quest.GetInstanceID()!= currentQuest.GetInstanceID()){
-			return ;
-		}
+		// if(quest.GetInstanceID()!= currentQuest.GetInstanceID()){
+		// 	return ;
+		// }
 		quests.Add(quest);
 		hasQuest= true;
 		waitingForQuest= true;

@@ -6,7 +6,7 @@ public class QuestManager: MonoBehaviour
 {
 	
 	public List<Quest> quests;
-	
+	QuestContainer quest_container;
 	
 
 	public void addQuest(Quest quest)
@@ -42,8 +42,8 @@ public class QuestManager: MonoBehaviour
 			}
 			cont_quest++;			
 		}
-		
 	}
+
 	public bool enemyKilled(GameObject enemy)
 	{
 		

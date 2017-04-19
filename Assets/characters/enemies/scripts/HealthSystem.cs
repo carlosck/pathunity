@@ -15,7 +15,7 @@ public class HealthSystem : MonoBehaviour {
 	bool damaged;
 	public Transform show_damage;
 	GameObject damage_enemy;
-	QuestManager questManager;
+	public QuestContainer quest_container;
 	Transform enemy_transform;
 	SpriteRenderer renderer;
 	CharacterMotor characterMotor;
@@ -34,7 +34,7 @@ public class HealthSystem : MonoBehaviour {
 		enemy_transform= GetComponent<Transform>();	
 		anim = transform.Find("animContainer/animations").GetComponent <Animator>();
 		characterMotor = GetComponent<CharacterMotor>();
-		questManager = GameObject.FindGameObjectWithTag("Player").GetComponent <QuestManager>();
+		//questManager = GameObject.FindGameObjectWithTag("Player").GetComponent <QuestManager>();
 		anim.speed= Random.Range(0.8f,1.2f);
 		healthSlider = transform.Find("Canvas/HealtSlider").GetComponent <Slider>();
 		healthSlider.maxValue = startingHealth;
@@ -91,7 +91,7 @@ public class HealthSystem : MonoBehaviour {
 		anim.SetInteger("Direction", 0);
 		characterMotor.Die();
 		
-		bool isPartOfaQuest= questManager.enemyKilled(gameObject);
+		bool isPartOfaQuest= quest_container.enemyKilled(gameObject);
 		
 		//if(!isPartOfaQuest)
 			Destroy(this.gameObject,2f);		

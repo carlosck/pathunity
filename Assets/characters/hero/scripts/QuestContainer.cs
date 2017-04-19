@@ -16,7 +16,8 @@ public class QuestContainer: MonoBehaviour
 	NPCInteract npcInteract;
 
 	public bool loaded = false;
-	public int currentQuestId ;
+	private int currentQuestId ;
+	Quest currentQuest;
 	public int coins ;
 	public bool FromFile ;	
 
@@ -33,10 +34,11 @@ public class QuestContainer: MonoBehaviour
 
 	public void startQuestAt(int i)
 	{
-		var currentQuest = quests[i];
+		Debug.Log("---------------Quest id= "+i);
+		currentQuest = quests[i];
 		Debug.Log(currentQuest);
-
-		activateQuestOnPlayer(currentQuest);
+		currentQuestId= i;
+		activateQuest(currentQuest);
 		npc= currentQuest.getQuestReceiver(); 
 		var cam= currentQuest.getCam(); 
 		cam.GetComponent<Camera>().enabled=true;
@@ -46,9 +48,15 @@ public class QuestContainer: MonoBehaviour
 
 	}
 
-	public void activateQuestOnPlayer(Quest quest)
+	public void activateQuest(Quest quest)
 	{
-		questManagerPlayer.addQuest(quest);
+		quest.init();
+		
+		if(quest.isGoToTalkSomeone)
+		{
+			quest.getQuestReceiver().GetComponent <NPCInteract>().setTurnQuest(quest);
+			quest.getQuestReceiver().GetComponent <NPCInteract>().QuestReady();			
+		}
 	}
 	public void activateQuestOnNPC(Quest quest)
 	{
@@ -66,7 +74,11 @@ public class QuestContainer: MonoBehaviour
 	}
 	public void nextQuest()
 	{
-		
+		Debug.Log("nextQuest->"+currentQuestId);
+		if(currentQuestId+1<=quests.Count)
+		{
+			startQuestAt(currentQuestId+1);
+		}
 	}
 	public void Save()
 	{
@@ -105,6 +117,70 @@ public class QuestContainer: MonoBehaviour
 		
 		loaded= true;
 		
+	}
+	public bool enemyKilled(GameObject enemy)
+	{
+		
+		Debug.Log("killed ");
+		int enemy_id=enemy.GetInstanceID();
+		bool found= false;
+		int cont_quest=currentQuestId;
+		
+		//find in all quest if a the enemy killed is part of a quest
+		while(!found && cont_quest<quests.Count)
+		{
+			
+			foreach(Transform child in quests[cont_quest].transform.Find("Enemies"))
+			{
+				
+				if(enemy_id==child.gameObject.GetInstanceID())
+				{
+					found= true;
+					UpdateStatus(cont_quest,child.gameObject.GetInstanceID());
+					Destroy(child.gameObject,1f);					
+					break;
+				}
+			}
+			cont_quest++;			
+		}
+		return found;
+	}
+	void UpdateStatus(int questAt,int enemyID)
+	{
+		Debug.Log("UpdateStatus");
+		Quest quest= quests[questAt];
+		Debug.Log(quest.transform.Find("Enemies").childCount);
+		if(quest.transform.Find("Enemies").childCount<=1)
+		{
+			Debug.Log("endQuest");
+			quest.getQuestReceiver().GetComponent <NPCInteract>().QuestReady();
+			
+		}
+	}
+	public void finishQuest(Quest quest)
+	{
+		nextQuest();
+		// bool found= false;
+		// int cont_quest=0;
+		// //TODO: give reward to player
+		// //quest.reward
+
+		
+		// //find in all quest if a the enemy killed is part of a quest
+		// while(!found && cont_quest<quests.Count)
+		// {
+			
+		// 	if(quest.GetInstanceID()==quests[cont_quest].GetInstanceID())
+		// 	{
+		// 		found= true;
+		// 		quests.RemoveAt(cont_quest);
+		// 	}
+		// 	cont_quest++;			
+		// }
+	}
+	public int getCurrentQuestId()
+	{
+		return currentQuestId;
 	}
 
 }

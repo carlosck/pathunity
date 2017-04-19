@@ -71,7 +71,7 @@ public class main_menu : MonoBehaviour {
 		switch(current_position)
 		{
 			case 0: 
-				if(gameQuestContainer.currentQuestId>0){
+				if(gameQuestContainer.getCurrentQuestId()>0){
 					continueGame();
 				}
 			break;
@@ -109,9 +109,9 @@ public class main_menu : MonoBehaviour {
 	public void Start()
 	{
 		print("quest");
-		print(gameQuestContainer.currentQuestId);
+		print(gameQuestContainer.getCurrentQuestId());
 
-		if(gameQuestContainer.currentQuestId>0){
+		if(gameQuestContainer.getCurrentQuestId()>0){
 			btn_continue.SetActive(true);
 			btn_continue_disabled.SetActive(false);
 		}

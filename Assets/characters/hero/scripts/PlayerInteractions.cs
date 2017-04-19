@@ -11,7 +11,7 @@ public class PlayerInteractions : MonoBehaviour
 	bool NPCInRange = false;
 	CharacterMotor characterMotor;
 	float timer;
-	public QuestManager questManager;
+	public QuestContainer quest_container;
 	public float timeBetweenInteractions = 0.5f;
 	List <Quest> quests;
 
@@ -19,7 +19,7 @@ public class PlayerInteractions : MonoBehaviour
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
 		characterMotor = player.GetComponent<CharacterMotor>();
-		questManager=player.GetComponent<QuestManager>();
+		//questManager=player.GetComponent<QuestManager>();
 		//quests = new List<Quest>();
 	}
 
@@ -53,6 +53,7 @@ public class PlayerInteractions : MonoBehaviour
 
 		if(NPCInRange && Input.GetKey("x") && NPCinteract.canInteract && timer >= timeBetweenInteractions)
 		{
+			Debug.Log("x");
 			if(!NPCinteract.busyInteracting)
 			{
 				NPCinteract.StartInteracting();
@@ -77,13 +78,5 @@ public class PlayerInteractions : MonoBehaviour
 		characterMotor.canControl= true;
 	}
 
-	public void setQuest(Quest quest)
-	{		
-		questManager.addQuest(quest);		
-	}
 	
-	public void finishQuest(Quest quest)
-	{		
-		questManager.finishQuest(quest);		
-	}
 }
